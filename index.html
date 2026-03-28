@@ -44,7 +44,7 @@
     <div class="container is-max-desktop">
       <div class="columns is-centered">
         <div class="column has-text-centered">
-          <div style="text-align: center; margin-bottom: 15px;">
+          <div style="text-align: center; margin-bottom: 5px;">
             <img src="static/images/plena_logo.png" alt="PLENA Logo" style="height: 180px;">
           </div>
           <h1 class="title is-1 publication-title">PLENA: Breaking the Memory Walls for Agentic LLM Inference</h1>
@@ -133,31 +133,25 @@
 </section>
 
 
-<!-- Paper abstract -->
+<!-- Abstract -->
 <section class="section hero is-light">
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
-        <h2 class="title is-3">Overview</h2>
+        <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
           <p>
-          <strong>P</strong>rogrammable <strong>L</strong>ong-context <strong>E</strong>fficient <strong>N</strong>eural <strong>A</strong>ccelerator (PLENA) is a transformer accelerator designed to sustain high GEMM utilization across all inference stages&mdash;both prefilling and decoding&mdash;particularly for agentic LLM workloads with long context lengths. PLENA achieves high efficiency for long-context inference through three complementary optimization pathways spanning both hardware and software design.
+          LLMs now form the backbone of AI agents for a diverse array of applications, including tool use, command-line interfaces, and web or computer interaction. These agentic LLM inference tasks are fundamentally different from chatbot-focused inference&mdash;they often have much larger context lengths to capture complex, prolonged inputs, such as an entire webpage DOM or complicated tool call trajectories. This, in turn, generates significant off-chip memory traffic for hardware at the inference stage and causes the workload to be constrained by the two memory walls, namely the <em>bandwidth</em> and <em>capacity</em> walls, preventing the compute units from achieving high utilization.
           </p>
           <p>
-          First, PLENA introduces a <em>flattened systolic array</em> (<strong>Pathway 1</strong>), which addresses the architectural mismatch between conventional square systolic arrays and the non-square GEMM shapes commonly observed during LLM inference. By aligning the compute fabric with typical inference workloads, the flattened design significantly improves multiplier utilization.
-          </p>
-          <p>
-          Second, PLENA adopts an <em>asymmetric quantization strategy</em> with Post-Training Quantization (PTQ) optimizations (<strong>Pathway 2</strong>), where weights (W), activations (A), and KV cache (KV) can be configured with different precision levels. This flexibility alleviates both memory bandwidth and memory capacity bottlenecks. More aggressive quantization for weights and KV cache further frees HBM capacity, enabling system-level scaling such as larger batch sizes and longer context support.
-          </p>
-          <p>
-          Third, PLENA introduces a custom ISA and architecture designed to efficiently support <em>FlashAttention</em> (<strong>Pathway 3</strong>), an IO-aware fused attention algorithm that significantly reduces off-chip memory traffic. By minimizing memory movement during attention computation, PLENA reduces the likelihood of bandwidth saturation, thereby mitigating the memory wall and improving overall inference efficiency.
+          In this paper, we introduce PLENA, a hardware&ndash;software co-designed system that applies three core optimization pathways. PLENA features a novel flattened systolic-array architecture (<em>Pathway 1</em>) and efficient compute and memory units that support an asymmetric quantization scheme (<em>Pathway 2</em>). It also provides native support for FlashAttention (<em>Pathway 3</em>). In addition, PLENA is developed with a complete software&ndash;hardware stack, including a custom ISA, a compiler, a transaction-level simulator, and an automated design-space exploration flow. Experimental results show that PLENA delivers up to 2.23&times; and 4.70&times; higher throughput than the A100 GPU and TPU v6e, respectively, under identical multiplier counts and memory configurations during LLaMA agentic inference. PLENA also achieves up to 4.04&times; higher energy efficiency than A100 GPU. The full PLENA system&mdash;including its simulator, compiler, ISA, and RTL implementation&mdash;will be open-sourced to the research community.
           </p>
         </div>
       </div>
     </div>
   </div>
 </section>
-<!-- End paper abstract -->
+<!-- End abstract -->
 
 
 <!-- System Figure -->
@@ -227,24 +221,6 @@
 </section>
 
 <style>
-  .figure-image {
-    max-width: 90%;
-    height: auto;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 20px;
-  }
-
-  .results-description {
-    text-align: left;
-    line-height: 1.6;
-    margin: 0 auto;
-    max-width: 90%;
-    color: #333;
-    font-size: 0.95rem;
-  }
-
   .results-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -276,6 +252,24 @@
     font-size: 0.95rem;
     opacity: 0.95;
     line-height: 1.4;
+  }
+
+  .figure-image {
+    max-width: 90%;
+    height: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+  }
+
+  .results-description {
+    text-align: left;
+    line-height: 1.6;
+    margin: 0 auto;
+    max-width: 90%;
+    color: #333;
+    font-size: 0.95rem;
   }
 
   @media (max-width: 768px) {
