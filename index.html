@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="PLENA: Breaking the Memory Walls for Agentic LLM Inference">
+  <meta property="og:title" content="PLENA: Breaking the Memory Walls for Agentic LLM Inference"/>
+  <meta property="og:description" content="A hardware-software co-designed system that breaks through bandwidth and capacity memory walls for agentic LLM inference."/>
+  <meta property="og:url" content="https://plena.github.io"/>
+  <meta property="og:image" content="static/images/plena_logo.png" />
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+
+  <meta name="twitter:title" content="PLENA: Breaking the Memory Walls for Agentic LLM Inference">
+  <meta name="twitter:description" content="A hardware-software co-designed system for agentic LLM inference with up to 2.23x higher throughput than A100 GPU.">
+  <meta name="twitter:image" content="static/images/plena_logo.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="keywords" content="LLM inference, hardware accelerator, agentic AI, systolic array, memory wall, FlashAttention, quantization">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>PLENA: Breaking the Memory Walls for Agentic LLM Inference</title>
+  <link rel="icon" type="image/x-icon" href="static/images/favicon.ico">
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+  rel="stylesheet">
+
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script src="static/js/bulma-carousel.min.js"></script>
+  <script src="static/js/bulma-slider.min.js"></script>
+  <script src="static/js/index.js"></script>
+</head>
+<body>
+
+
+<section class="section hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">PLENA: Breaking the Memory Walls for Agentic LLM Inference</h1>
+
+          <div style="margin: 20px 0;">
+            <img src="static/images/plena_logo.png" alt="PLENA Logo" style="height: 120px;">
+          </div>
+
+          <div class="is-size-5 publication-authors authors-list">
+            <span class="author-block">Haoran Wu<sup>1</sup>,</span>
+            <span class="author-block">Can Xiao<sup>2</sup>,</span>
+            <span class="author-block">Jiayi Nie<sup>1</sup>,</span>
+            <span class="author-block">Xuan Guo<sup>2</sup>,</span>
+            <span class="author-block">Binglei Lou<sup>2</sup>,</span>
+            <span class="author-block">Jeffrey T.H. Wong<sup>2</sup>,</span>
+            <span class="author-block">Zhiwen Mo<sup>2</sup>,</span>
+            <span class="author-block">Cheng Zhang<sup>2</sup>,</span>
+            <span class="author-block">Przemyslaw Forys<sup>2</sup>,</span>
+            <span class="author-block">Chengyang Ai<sup>3</sup>,</span>
+            <span class="author-block">Timi Adeniran<sup>1</sup>,</span>
+            <span class="author-block">Wayne Luk<sup>2</sup>,</span>
+            <span class="author-block">Hongxiang Fan<sup>2</sup>,</span>
+            <span class="author-block">Jianyi Cheng<sup>3</sup>,</span>
+            <span class="author-block">Timothy M. Jones<sup>1</sup>,</span>
+            <span class="author-block">Rika Antonova<sup>1</sup>,</span>
+            <span class="author-block">Robert Mullins<sup>1</sup>,</span>
+            <span class="author-block">Aaron Zhao<sup>2</sup></span>
+          </div>
+
+          <div class="is-size-5 publication-authors affiliations-list">
+            <span class="author-block"><sup>1</sup>University of Cambridge</span>
+            <span class="author-block"><sup>2</sup>Imperial College London</span>
+            <span class="author-block"><sup>3</sup>University of Edinburgh</span>
+          </div>
+
+          <div class="is-size-5 publication-venue" style="margin-top: 0.8em; margin-bottom: 0.5em;">
+            <span style="color: #ff3860; font-weight: bold;">ISCA 2026</span>
+          </div>
+
+          <div class="publication-links has-text-centered">
+            <!-- Arxiv PDF link -->
+            <span class="link-block">
+              <a href="https://arxiv.org/pdf/2509.09505" target="_blank"
+              class="external-link button is-normal is-rounded is-dark">
+              <span class="icon">
+                <i class="fas fa-file-pdf"></i>
+              </span>
+              <span>Paper</span>
+            </a>
+            </span>
+
+            <!-- ArXiv abstract Link -->
+            <span class="link-block">
+              <a href="https://arxiv.org/abs/2509.09505" target="_blank"
+              class="external-link button is-normal is-rounded is-dark">
+              <span class="icon">
+                <i class="ai ai-arxiv"></i>
+              </span>
+              <span>arXiv</span>
+            </a>
+            </span>
+
+            <!-- Github link -->
+            <span class="link-block">
+              <a href="https://github.com/AICrossSim/PLENA_Simulator/"
+                 class="external-link button is-normal is-rounded is-dark" target="_blank">
+                <span class="icon">
+                    <i class="fab fa-github"></i>
+                </span>
+                <span>Code</span>
+              </a>
+            </span>
+          </div>
+
+          <style>
+          .publication-authors {
+            text-align: center;
+            color: #666;
+            font-family: 'Roboto', 'Arial', sans-serif;
+          }
+
+          .authors-list, .affiliations-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.2em;
+            margin-bottom: 0.5em;
+          }
+
+          .author-block {
+            margin-bottom: 0.15em;
+            font-size: 1em;
+          }
+
+          .affiliations-list .author-block {
+            font-size: 0.95em;
+            margin: 0 0.6em;
+          }
+          </style>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Paper abstract -->
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+          LLMs now form the backbone of AI agents for a diverse array of applications, including tool use, command-line interfaces, and web or computer interaction. These agentic LLM inference tasks are fundamentally different from chatbot-focused inference &mdash; they often have much larger context lengths to capture complex, prolonged inputs, such as an entire webpage DOM or complicated tool call trajectories. This, in turn, generates significant off-chip memory traffic for hardware at the inference stage and causes the workload to be constrained by the two memory walls, namely the <em>bandwidth</em> and <em>capacity</em> walls, preventing the compute units from achieving high utilization.
+          </p>
+          <p>
+          In this paper, we introduce <strong>PLENA</strong>, a hardware&ndash;software co-designed system that applies three core optimization pathways. PLENA features a novel flattened systolic-array architecture (<em>Pathway 1</em>) and efficient compute and memory units that support an asymmetric quantization scheme (<em>Pathway 2</em>). It also provides native support for FlashAttention (<em>Pathway 3</em>). In addition, PLENA is developed with a complete software&ndash;hardware stack, including a custom ISA, a compiler, a transaction-level simulator, and an automated design-space exploration flow. Experimental results show that PLENA delivers up to <strong>2.23&times;</strong> and <strong>4.70&times;</strong> higher throughput than the A100 GPU and TPU v6e, respectively, under identical multiplier counts and memory configurations during LLaMA agentic inference. PLENA also achieves up to <strong>4.04&times;</strong> higher energy efficiency than A100 GPU. The full PLENA system &mdash; including its simulator, compiler, ISA, and RTL implementation &mdash; will be open-sourced to the research community.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End paper abstract -->
+
+
+<!-- Architecture Figure -->
+<section class="section hero">
+  <div class="container is-max-desktop">
+    <div class="has-text-centered">
+      <h2 class="title is-3">Hardware Architecture</h2>
+      <div class="hero-body">
+        <figure class="image">
+          <img src="static/images/plena_arch.png" alt="PLENA hardware architecture" class="blend-img-background center-image figure-image">
+        </figure>
+        <p class="results-description">
+          <strong>PLENA hardware architecture overview.</strong> The design features a flattened systolic array in the Matrix Unit, dedicated Vector and Scalar Units, on-chip SRAM hierarchy, and an HBM controller with built-in quantizer/dequantizer for asymmetric precision support.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- System Figure -->
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="has-text-centered">
+      <h2 class="title is-3">Software-Hardware Co-Design Stack</h2>
+      <div class="hero-body">
+        <figure class="image">
+          <img src="static/images/plena_sys.png" alt="PLENA software-hardware co-design stack" class="blend-img-background center-image figure-image">
+        </figure>
+        <p class="results-description">
+          <strong>PLENA full-stack overview.</strong> The system integrates a compiler (parser, scheduling, code generation, assembler), a training-free quantization optimization flow, a transaction-level simulator with analytic models, RTL implementation with hardware evaluation, and an automated co-design DSE loop connecting software and hardware optimization.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Key Results -->
+<section class="section hero">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Key Results</h2>
+        <div class="content">
+          <div class="results-grid">
+            <div class="result-card">
+              <div class="result-number">2.23&times;</div>
+              <div class="result-label">Higher throughput than A100 GPU</div>
+            </div>
+            <div class="result-card">
+              <div class="result-number">4.70&times;</div>
+              <div class="result-label">Higher throughput than TPU v6e</div>
+            </div>
+            <div class="result-card">
+              <div class="result-number">4.04&times;</div>
+              <div class="result-label">Higher energy efficiency than A100 GPU</div>
+            </div>
+          </div>
+          <p class="results-description" style="margin-top: 1.5rem;">
+            Under identical multiplier counts and memory configurations during LLaMA agentic inference workloads.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .figure-image {
+    max-width: 90%;
+    height: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+  }
+
+  .results-description {
+    text-align: left;
+    line-height: 1.6;
+    margin: 0 auto;
+    max-width: 90%;
+    color: #333;
+    font-size: 0.95rem;
+  }
+
+  .results-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+  }
+
+  .result-card {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 12px;
+    padding: 2rem 1rem;
+    color: white;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s;
+  }
+
+  .result-card:hover {
+    transform: translateY(-5px);
+  }
+
+  .result-number {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+    font-family: 'Google Sans', sans-serif;
+  }
+
+  .result-label {
+    font-size: 0.95rem;
+    opacity: 0.95;
+    line-height: 1.4;
+  }
+
+  @media (max-width: 768px) {
+    .results-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .results-description {
+      font-size: 0.9rem;
+      text-align: center;
+    }
+
+    .figure-image {
+      max-width: 100%;
+    }
+  }
+</style>
+
+
+<!--BibTex citation -->
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <div style="position: relative;">
+      <pre><code id="bibtex-code">@article{wu2025plena,
+    title={PLENA: Breaking the Memory Walls for Agentic LLM Inference},
+    author={Haoran Wu and Can Xiao and Jiayi Nie and Xuan Guo and Binglei Lou and Jeffrey T.H. Wong and Zhiwen Mo and Cheng Zhang and Przemyslaw Forys and Chengyang Ai and Timi Adeniran and Wayne Luk and Hongxiang Fan and Jianyi Cheng and Timothy M. Jones and Rika Antonova and Robert Mullins and Aaron Zhao},
+    year={2025}
+}</code></pre>
+      <button class="button is-small is-primary copy-btn" onclick="copyBibTeX()" style="position: absolute; top: 10px; right: 10px;">
+        <span class="icon is-small">
+          <i class="fas fa-copy"></i>
+        </span>
+        <span>Copy</span>
+      </button>
+    </div>
+  </div>
+</section>
+<!--End BibTex citation -->
+
+<script>
+function copyBibTeX() {
+  const bibtexCode = document.getElementById('bibtex-code').textContent;
+  navigator.clipboard.writeText(bibtexCode).then(function() {
+    const btn = document.querySelector('.copy-btn span:last-child');
+    const originalText = btn.textContent;
+    btn.textContent = 'Copied!';
+    setTimeout(() => {
+      btn.textContent = originalText;
+    }, 2000);
+  });
+}
+</script>
+
+<style>
+.copy-btn {
+  opacity: 0.8;
+  transition: opacity 0.3s;
+}
+.copy-btn:hover {
+  opacity: 1;
+}
+</style>
+
+
+  <footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a> which was adopted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
+            This website is licensed under a <a rel="license"  href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+  </body>
+  </html>
