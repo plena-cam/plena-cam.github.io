@@ -141,7 +141,16 @@
         <h2 class="title is-3">Overview</h2>
         <div class="content has-text-justified">
           <p>
-          <strong>P</strong>rogrammable <strong>L</strong>ong-context <strong>E</strong>fficient <strong>N</strong>eural <strong>A</strong>ccelerator (PLENA), an efficient transformer model accelerator system designed to maintain high utilization of GEMM units across all inference stages (prefilling and decoding), particularly for agentic LLM inference tasks with large contexts. PLENA achieves high efficiency for long-context inference by exploring three optimization pathways across both hardware and software design spaces.
+          <strong>P</strong>rogrammable <strong>L</strong>ong-context <strong>E</strong>fficient <strong>N</strong>eural <strong>A</strong>ccelerator (PLENA) is a transformer accelerator designed to sustain high GEMM utilization across all inference stages&mdash;both prefilling and decoding&mdash;particularly for agentic LLM workloads with long context lengths. PLENA achieves high efficiency for long-context inference through three complementary optimization pathways spanning both hardware and software design.
+          </p>
+          <p>
+          First, PLENA introduces a <em>flattened systolic array</em> (<strong>Pathway 1</strong>), which addresses the architectural mismatch between conventional square systolic arrays and the non-square GEMM shapes commonly observed during LLM inference. By aligning the compute fabric with typical inference workloads, the flattened design significantly improves multiplier utilization.
+          </p>
+          <p>
+          Second, PLENA adopts an <em>asymmetric quantization strategy</em> with Post-Training Quantization (PTQ) optimizations (<strong>Pathway 2</strong>), where weights (W), activations (A), and KV cache (KV) can be configured with different precision levels. This flexibility alleviates both memory bandwidth and memory capacity bottlenecks. More aggressive quantization for weights and KV cache further frees HBM capacity, enabling system-level scaling such as larger batch sizes and longer context support.
+          </p>
+          <p>
+          Third, PLENA introduces a custom ISA and architecture designed to efficiently support <em>FlashAttention</em> (<strong>Pathway 3</strong>), an IO-aware fused attention algorithm that significantly reduces off-chip memory traffic. By minimizing memory movement during attention computation, PLENA reduces the likelihood of bandwidth saturation, thereby mitigating the memory wall and improving overall inference efficiency.
           </p>
         </div>
       </div>
