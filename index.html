@@ -45,7 +45,7 @@
       <div class="columns is-centered">
         <div class="column has-text-centered">
           <div style="text-align: center; margin-bottom: 15px;">
-            <img src="static/images/plena_logo.png" alt="PLENA Logo" style="height: 120px;">
+            <img src="static/images/plena_logo.png" alt="PLENA Logo" style="height: 180px;">
           </div>
           <h1 class="title is-1 publication-title">PLENA: Breaking the Memory Walls for Agentic LLM Inference</h1>
 
@@ -78,17 +78,6 @@
 
 
           <div class="publication-links has-text-centered">
-            <!-- Arxiv PDF link -->
-            <span class="link-block">
-              <a href="https://arxiv.org/pdf/2509.09505" target="_blank"
-              class="external-link button is-normal is-rounded is-dark">
-              <span class="icon">
-                <i class="fas fa-file-pdf"></i>
-              </span>
-              <span>Paper</span>
-            </a>
-            </span>
-
             <!-- ArXiv abstract Link -->
             <span class="link-block">
               <a href="https://arxiv.org/abs/2509.09505" target="_blank"
@@ -149,13 +138,10 @@
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
-        <h2 class="title is-3">Abstract</h2>
+        <h2 class="title is-3">Overview</h2>
         <div class="content has-text-justified">
           <p>
-          LLMs now form the backbone of AI agents for a diverse array of applications, including tool use, command-line interfaces, and web or computer interaction. These agentic LLM inference tasks are fundamentally different from chatbot-focused inference &mdash; they often have much larger context lengths to capture complex, prolonged inputs, such as an entire webpage DOM or complicated tool call trajectories. This, in turn, generates significant off-chip memory traffic for hardware at the inference stage and causes the workload to be constrained by the two memory walls, namely the <em>bandwidth</em> and <em>capacity</em> walls, preventing the compute units from achieving high utilization.
-          </p>
-          <p>
-          In this paper, we introduce <strong>PLENA</strong>, a hardware&ndash;software co-designed system that applies three core optimization pathways. PLENA features a novel flattened systolic-array architecture (<em>Pathway 1</em>) and efficient compute and memory units that support an asymmetric quantization scheme (<em>Pathway 2</em>). It also provides native support for FlashAttention (<em>Pathway 3</em>). In addition, PLENA is developed with a complete software&ndash;hardware stack, including a custom ISA, a compiler, a transaction-level simulator, and an automated design-space exploration flow. Experimental results show that PLENA delivers up to <strong>2.23&times;</strong> and <strong>4.70&times;</strong> higher throughput than the A100 GPU and TPU v6e, respectively, under identical multiplier counts and memory configurations during LLaMA agentic inference. PLENA also achieves up to <strong>4.04&times;</strong> higher energy efficiency than A100 GPU. The full PLENA system &mdash; including its simulator, compiler, ISA, and RTL implementation &mdash; will be open-sourced to the research community.
+          <strong>P</strong>rogrammable <strong>L</strong>ong-context <strong>E</strong>fficient <strong>N</strong>eural <strong>A</strong>ccelerator (PLENA), an efficient transformer model accelerator system designed to maintain high utilization of GEMM units across all inference stages (prefilling and decoding), particularly for agentic LLM inference tasks with large contexts. PLENA achieves high efficiency for long-context inference by exploring three optimization pathways across both hardware and software design spaces.
           </p>
         </div>
       </div>
@@ -165,26 +151,8 @@
 <!-- End paper abstract -->
 
 
-<!-- Architecture Figure -->
-<section class="section hero">
-  <div class="container is-max-desktop">
-    <div class="has-text-centered">
-      <h2 class="title is-3">Hardware Architecture</h2>
-      <div class="hero-body">
-        <figure class="image">
-          <img src="static/images/plena_arch.png" alt="PLENA hardware architecture" class="blend-img-background center-image figure-image">
-        </figure>
-        <p class="results-description">
-          <strong>PLENA hardware architecture overview.</strong> The design features a flattened systolic array in the Matrix Unit, dedicated Vector and Scalar Units, on-chip SRAM hierarchy, and an HBM controller with built-in quantizer/dequantizer for asymmetric precision support.
-        </p>
-      </div>
-    </div>
-  </div>
-</section>
-
-
 <!-- System Figure -->
-<section class="section hero is-light">
+<section class="section hero">
   <div class="container is-max-desktop">
     <div class="has-text-centered">
       <h2 class="title is-3">Software-Hardware Co-Design Stack</h2>
@@ -194,6 +162,24 @@
         </figure>
         <p class="results-description">
           <strong>PLENA full-stack overview.</strong> The system integrates a compiler (parser, scheduling, code generation, assembler), a training-free quantization optimization flow, a transaction-level simulator with analytic models, RTL implementation with hardware evaluation, and an automated co-design DSE loop connecting software and hardware optimization.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Architecture Figure -->
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="has-text-centered">
+      <h2 class="title is-3">Hardware Architecture</h2>
+      <div class="hero-body">
+        <figure class="image">
+          <img src="static/images/plena_arch.png" alt="PLENA hardware architecture" class="blend-img-background center-image figure-image">
+        </figure>
+        <p class="results-description">
+          <strong>PLENA hardware architecture overview.</strong> The design features a flattened systolic array in the Matrix Unit, dedicated Vector and Scalar Units, on-chip SRAM hierarchy, and an HBM controller with built-in quantizer/dequantizer for asymmetric precision support.
         </p>
       </div>
     </div>
